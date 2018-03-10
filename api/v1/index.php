@@ -55,11 +55,11 @@ $app->get('/purchaselist', function() {
     echoResponse(200, $rows);
 });
 
-$app->post('/saveitemlist', function() { 
+$app->post('/saveitemlist', function() use ($app) { 
    $data = json_decode($app->request->getBody());
-    $mandatory = array('name');
+    $mandatory = array('item_name');
     global $db;
-    $rows = $db->insert("itemlist", $data, $mandatory);
+    $rows = $db->insert("items", $data, $mandatory);
     if($rows["status"]=="success")
         $rows["message"] = "Item added successfully.";
     echoResponse(200, $rows);
