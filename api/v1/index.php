@@ -27,7 +27,7 @@ $app->get('/products', function() {
 
 $app->get('/itemlist', function() { 
     global $db;
-    $rows = $db->select("itemlist","id,name",array());
+    $rows = $db->select("items","item_id,item_name",array());
     echoResponse(200, $rows);
 });
 
