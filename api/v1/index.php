@@ -18,20 +18,44 @@ delete(table name, where clause as array)
 */
 
 
-// Products
-$app->get('/products', function() { 
-    global $db;
-    $rows = $db->select("products","id,currentdate,name,specification,quantity,serialno,invoiceno,warrantyperiod,updatedby",array());
-    echoResponse(200, $rows);
-});
-
 $app->get('/itemlist', function() { 
     global $db;
-    $rows = $db->select("items","item_id,item_name",array());
+    $rows = $db->select("items","item_id,item_name",array("status"=>1));
     echoResponse(200, $rows);
 });
 
-$app->post('/itemlist', function() { 
+$app->get('/arealist', function() { 
+    global $db;
+    $rows = $db->select("area","id,area_name",array("status"=>1,"is_delete"=>0));
+    echoResponse(200, $rows);
+});
+
+$app->get('/employeelist', function() { 
+    global $db;
+    $rows = $db->select("employee","eid,emp_firstname,emp_lastname,designation,emp_id",array("status"=>1,"is_delete"=>0));
+    echoResponse(200, $rows);
+});
+
+//issue list
+$app->get('/issuedlist', function() { 
+    global $db;
+    $q = "select IT.item_id,IT.item_name,IL.quantity,IL.ticket_no,EM.eid,EM.emp_firstname,
+          EM.emp_lastname,EM.designation,EM.emp_id from issue_list IL join employee EM on  
+          IL.emp_id = EM.eid join items IT on IT.item_id = IL.item_id where IL.is_delete = '0'";
+    $rows = $db->executeQuery($q);
+    echoResponse(200, $rows);
+});
+
+$app->get('/purchaselist', function() { 
+    global $db;
+    $q = "select IT.item_id,IT.item_name,PU.vendor,PU.specification,PU.quantity,PU.warranty_period,
+          PU.invoice_no,PU.serial_no from purchase PU join items IT on IT.item_id = PU.item_id 
+          where PU.is_delete = '0'";
+    $rows = $db->executeQuery($q);
+    echoResponse(200, $rows);
+});
+
+$app->post('/saveitemlist', function() { 
    $data = json_decode($app->request->getBody());
     $mandatory = array('name');
     global $db;
