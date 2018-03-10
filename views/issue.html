@@ -13,13 +13,13 @@
     {{msg}}
   </div>
 <div class="table-responsive">
-<div class="panel panel-primary">  
+<div class="panel-primary">  
   <div class="panel-heading h-45" >
     <div class="pull-left">List of issued products</div>
       <div class="sw-search pull-right"  >
             <div class="nav-search" id="nav-search">
                     Filter: <span class="input-icon">
-                        <input placeholder="Filter products list ..." class="nav-search-input" ng-model="filterProduct" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
+                        <input placeholder="Filter issuelist list ..." class="nav-search-input" ng-model="filterProduct" ng-change="resetLimit();"  autocomplete="off" type="text" style="width:300px;" focus>
                         <i class="search-icon fa fa-search nav-search-icon"></i>
                     </span>
             </div>
@@ -27,13 +27,13 @@
     </div>
   <div class="panel-body">
     <table class="table table-striped table-bordered table-hover">
-    <tr ng-show="products.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;No data found</td></tr>
-    <tr ng-hide="products.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Loading</td></tr>
+    <tr ng-show="issuelist.length==0"><td style="vertical-align:middle;"><i class="fa fa-ban fa-3x"></i>&nbsp;No data found</td></tr>
+    <tr ng-hide="issuelist.length>-1"><td style="vertical-align:middle;"><i class="fa fa-cog fa-3x fa-spin"></i>&nbsp;Loading</td></tr>
     
     <tr><th ng-repeat="c in columns">{{c.text}}</th></tr>
 
-    <tr ng-repeat="c in products | filter:filterProduct | orderBy:'-id'" id="{{c.id}}" ng-animate=" 'animate'">
-        <td>{{c.id}}</td><td>{{c.name}}</td><td>{{c.quantity}}</td><td>{{c.serialno}}</td><td>{{c.warrantyperiod}}</td>
+    <tr ng-repeat="c in issuelist | filter:filterProduct | orderBy:'-id'" id="{{c.id}}" ng-animate=" 'animate'">
+        <td>{{c.item_id}}</td><td>{{c.item_name}}</td><td>{{c.quantity}}</td><td>{{c.ticket_no}}</td><td>{{c.emp_firstname}}</td>
        
         <td style="width:100px">
             <div class="btn-group">

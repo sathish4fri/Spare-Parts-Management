@@ -11,7 +11,7 @@
     <div class="col-lg-12">
 
 <div class="table-responsive">
-<div class="panel panel-primary">
+<div class="panel-primary">
   <div class="panel-heading h-45" >
     <div class="pull-left">List of Item</div>
       <div class="sw-search pull-right"  >
@@ -34,8 +34,8 @@
     	<th >Actions</th>
     </tr>
 
-    <tr ng-repeat="c in items | filter:filterProduct | orderBy:'-id'" id="{{c.id}}" ng-animate=" 'animate'">
-        <td>{{c.id}}</td><td>{{c.name}}</td>
+    <tr ng-repeat="c in items | filter:filterProduct | orderBy:'-item_id'" id="{{c.item_id}}" ng-animate=" 'animate'">
+        <td>{{c.item_id}}</td><td>{{c.item_name}}</td>
        
         <td style="width:100px">
             <div class="btn-group">
@@ -45,11 +45,55 @@
         </td>
     </tr>
     </table>
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addItem">
+  Add Item
+</button>
 </div>
 </div>
 </div>
         <!-- /.panel -->
     </div>
     <!-- /.col-lg-12 -->
+</div>
+
+
+<div class="modal fade" id="addItem" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myLargeModalLabel">Add Product</h4>
+      </div>
+      <form name="product_form" class="form-horizontal" role="form" novalidate>
+      <div class="modal-body">            
+                <form-element label="NAME"  style="" mod="product">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Name</label>
+                    <select class="form-control" id="NAME" ng-model="product.name" ng-disabled="product.id" ng-options="item as item.name for item in items track by item.id" required  focus>
+                      </select>
+                </form-element>
+                <br>
+                <form-element label="Specification" mod="product">
+                     <label for="defaultFormLoginEmailEx" class="grey-text">Specification</label>
+                    <textarea class="form-control" name="specification" placeholder="Specification" ng-model="product.specification">{{product.specification}}</textarea>
+                </form-element>               
+                <div class="space"></div>
+                <div class="space-4"></div>
+             
+            
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="saveProduct(product);"
+                                    ng-disabled="product_form.$invalid || enableUpdate"
+                                    class="btn btn-sm btn-primary"
+                                    type="submit">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
 </div>
 </div>

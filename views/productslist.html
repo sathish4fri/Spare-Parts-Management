@@ -13,7 +13,7 @@
     {{msg}}
   </div>
 <div class="table-responsive">
-<div class="panel panel-primary">  
+<div class="panel-primary">  
   <div class="panel-heading h-45" >
     <div class="pull-left">List of products</div>
       <div class="sw-search pull-right"  >
@@ -32,8 +32,9 @@
     
     <tr><th ng-repeat="c in columns">{{c.text}}</th></tr>
 
-    <tr ng-repeat="c in products | filter:filterProduct | orderBy:'-id'" id="{{c.id}}" ng-animate=" 'animate'">
-        <td>{{c.id}}</td><td>{{c.name}}</td><td>{{c.specification}}</td><td>{{c.quantity}}</td><td>{{c.serialno}}</td><td>{{c.invoiceno}}</td><td>{{c.warrantyperiod}}</td><td>{{c.updatedby}}</td>
+    <tr ng-repeat="c in products | filter:filterProduct | orderBy:'-item_id'" id="{{c.item_id}}" ng-animate=" 'animate'">
+        <td>{{c.item_id}}</td><td>{{c.item_name}}</td><td>{{c.specification}}</td><td>{{c.quantity}}</td><td>{{c.vendor}}</td><td>{{c.serial_no}}</td><td>{{c.invoice_no}}</td><td>{{c.warranty_period}}</td>
+        <!--<td>{{c.updatedby}}</td>-->
        
         <td style="width:100px">
             <div class="btn-group">

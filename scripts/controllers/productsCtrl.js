@@ -10,7 +10,7 @@ angular.module('sbAdminApp')
   .controller('productsCtrl', function($scope,$position, $filter, Data ,$timeout) {
   	$scope.product = {};
     function getProduct(){
-        Data.get('products').then(function(data){
+        Data.get('purchaselist').then(function(data){
         $scope.products = data.data;
         }); 
       }
@@ -25,10 +25,11 @@ angular.module('sbAdminApp')
                     {text:"Name",predicate:"name",sortable:true},
                     {text:"Specification",predicate:"specification",sortable:true},
                     {text:"Quantity",predicate:"quantity",sortable:true},
+                     {text:"Vendor",predicate:"vendor",sortable:true},
                     {text:"Serial No",predicate:"serialno",reverse:true,sortable:true,dataType:"number"},
                     {text:"Invoice No",predicate:"invoiceno",sortable:true},
                     {text:"Warranty Period",predicate:"warrantyperiod",sortable:true},
-                    {text:"Updated By",predicate:"updatedby",sortable:false},
+                    //{text:"Updated By",predicate:"updatedby",sortable:false},
 					{text:"Action",predicate:"",sortable:false}
                 ];
 

@@ -10,8 +10,8 @@ angular.module('sbAdminApp')
   .controller('issueCtrl', function($scope,$position, $filter, Data ,$timeout) {
   	$scope.product = {};
     function getProduct(){
-        Data.get('products').then(function(data){
-        $scope.products = data.data;
+        Data.get('issuedlist').then(function(data){
+        $scope.issuelist = data.data;
         }); 
       }
     getProduct();
