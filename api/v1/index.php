@@ -70,6 +70,14 @@ $app->delete('/products/:id', function($id) {
     echoResponse(200, $rows);
 });
 
+$app->post('/login', function() use ($app){ 
+      $data = json_decode($app->request->getBody());
+    global $db;
+    $condition = array('name'=>$data->username);
+    $rows = $db->select("customers_auth","name,uid", $condition);
+    echoResponse(200, $rows);
+});
+
 function echoResponse($status_code, $response) {
     global $app;
     $app->status($status_code);

@@ -21,7 +21,7 @@ angular
       events:true,
     });
 
-    $urlRouterProvider.otherwise('/dashboard/home');
+    $urlRouterProvider.otherwise('/login');
 
     $stateProvider
       .state('dashboard', {
@@ -93,20 +93,28 @@ angular
             })
           }
         }
-      })
-      .state('dashboard.form',{
-        templateUrl:'views/form.html',
-        url:'/form'
-    })
+      })     
       .state('dashboard.blank',{
         templateUrl:'views/pages/blank.html',
         url:'/blank'
     })
       .state('login',{
         templateUrl:'views/pages/login.html',
-        url:'/login'
+        url:'/login',
+        controller:'loginCtrl',
+        resolve: {
+          loadMyFile:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+                name:'sbAdminApp',
+                files:[
+                'scripts/data.js',
+                'scripts/controllers/loginCtrl.js'
+                ]
+            })
+          }
+        }
     })
-      .state('dashboard.chart',{
+    /*  .state('dashboard.chart',{
         templateUrl:'views/chart.html',
         url:'/chart',
         controller:'ChartCtrl',
@@ -125,7 +133,7 @@ angular
             })
           }
         }
-    })
+    })*/
       .state('dashboard.products',{
         templateUrl:'views/productslist.html',
         url:'/products',
@@ -148,6 +156,18 @@ angular
             return $ocLazyLoad.load({
                 name:'sbAdminApp',
                 files:['scripts/controllers/itemCtrl.js']
+            })
+          }
+        }
+    }).state('dashboard.issue',{
+        templateUrl:'views/issue.html',
+        url:'/issue',
+        controller:'issueCtrl',
+        resolve: {
+          loadMyFile:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+                name:'sbAdminApp',
+                files:['scripts/controllers/issueCtrl.js']
             })
           }
         }
