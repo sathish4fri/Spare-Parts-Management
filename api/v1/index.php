@@ -55,6 +55,58 @@ $app->get('/purchaselist', function() {
     echoResponse(200, $rows);
 });
 
+$app->post('/savePurchase', function() use ($app) { 
+    $data = json_decode($app->request->getBody());
+    $mandatory = array('item_id','vendor','quantity','invoice_no','serial_no');
+    global $db;
+    $rows = $db->insert("purchase", $data, $mandatory);
+    if($rows["status"]=="success")
+        $rows["message"] = "Purchase added successfully.";
+    echoResponse(200, $rows);
+});
+
+$app->post('/updatePurchase', function() use ($app) { 
+    $data = json_decode($app->request->getBody());
+    $mandatory = array('pur_id','item_id','vendor','quantity','invoice_no','serial_no');
+    if($data->pur_id){
+        $where = array('pur_id'=>$data->pur_id);
+        global $db;
+        $rows = $db->update("purchase", $data, $where, $mandatory);
+        if($rows["status"]=="success")
+            $rows["message"] = "Purchase updated successfully.";
+    }else{
+        $rows["status"] = "failure";
+        $rows["message"] = "Purchase id missing.";
+    }
+    echoResponse(200, $rows);
+});
+
+$app->post('/saveIssued', function() use ($app) { 
+    $data = json_decode($app->request->getBody());
+    $mandatory = array('item_id','ticket_no','quantity','emp_id');
+    global $db;
+    $rows = $db->insert("issue_list", $data, $mandatory);
+    if($rows["status"]=="success")
+        $rows["message"] = "Product issued successfully.";
+    echoResponse(200, $rows);
+});
+
+$app->post('/updateIssued', function() use ($app) { 
+    $data = json_decode($app->request->getBody());
+    $mandatory = array('item_id','ticket_no','quantity','emp_id');
+    if($data->id){
+        $where = array('id'=>$data->id);
+        global $db;
+        $rows = $db->update("issue_list", $data, $where, $mandatory);
+        if($rows["status"]=="success")
+            $rows["message"] = "Issue list updated successfully.";
+    }else{
+        $rows["status"] = "failure";
+        $rows["message"] = "Issuing id missing.";
+    }
+    echoResponse(200, $rows);
+});
+
 $app->post('/saveitemlist', function() use ($app) { 
    $data = json_decode($app->request->getBody());
     $mandatory = array('item_name');
@@ -65,32 +117,19 @@ $app->post('/saveitemlist', function() use ($app) {
     echoResponse(200, $rows);
 });
 
-$app->post('/products', function() use ($app) { 
-    $data = json_decode($app->request->getBody());
-    $mandatory = array('name');
-    global $db;
-    $rows = $db->insert("products", $data, $mandatory);
-    if($rows["status"]=="success")
-        $rows["message"] = "Product added successfully.";
-    echoResponse(200, $rows);
-});
-
-$app->put('/products/:id', function($id) use ($app) { 
-    $data = json_decode($app->request->getBody());
-    $condition = array('id'=>$id);
-    $mandatory = array();
-    global $db;
-    $rows = $db->update("products", $data, $condition, $mandatory);
-    if($rows["status"]=="success")
-        $rows["message"] = "Product information updated successfully.";
-    echoResponse(200, $rows);
-});
-
-$app->delete('/products/:id', function($id) { 
-    global $db;
-    $rows = $db->delete("products", array('id'=>$id));
-    if($rows["status"]=="success")
-        $rows["message"] = "Product removed successfully.";
+$app->post('/updateitemlist', function() use ($app) { 
+   $data = json_decode($app->request->getBody());
+    $mandatory = array('item_name');
+    if($data->item_id){
+        $where = array('item_id'=>$data->item_id);
+        global $db;
+        $rows = $db->update("items", $data, $where, $mandatory);
+        if($rows["status"]=="success")
+            $rows["message"] = "Item added successfully.";
+    }else{
+        $rows["status"] = "failure";
+        $rows["message"] = "Item id missing.";
+    }
     echoResponse(200, $rows);
 });
 
