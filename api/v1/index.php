@@ -133,6 +133,30 @@ $app->post('/updateitemlist', function() use ($app) {
     echoResponse(200, $rows);
 });
 
+$app->post('/deletereq', function() use ($app) { 
+   $data = json_decode($app->request->getBody());
+   $mandatory = array();
+   $delete_mod_id = array('area'=>'id',
+                          'employee'=>'eid',
+                          'issue_list'=>'id',
+                          'items'=>'item_id',
+                          'purchase'=>'pur_id',
+                          'reorder'=>'id'
+                        );
+    if($data->del_id && $data->module){
+        $delete = array('is_delete'=>'1');
+        $where = array($delete_mod_id[$data->module]=>$data->del_id);
+        global $db;
+        $rows = $db->update($data->module, $delete, $where, $mandatory);
+        if($rows["status"]=="success")
+            $rows["message"] = "Record deleted successfully.";
+    }else{
+        $rows["status"] = "failure";
+        $rows["message"] = "Delete id missing.";
+    }
+    echoResponse(200, $rows);
+});
+
 $app->post('/login', function() use ($app){ 
       $data = json_decode($app->request->getBody());
     global $db;
