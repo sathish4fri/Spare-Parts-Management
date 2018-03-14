@@ -32,8 +32,8 @@
     
     <tr><th ng-repeat="c in columns">{{c.text}}</th></tr>
 
-    <tr ng-repeat="c in products | filter:filterProduct | orderBy:'-item_id'" id="{{c.item_id}}" ng-animate=" 'animate'">
-        <td>{{c.item_id}}</td><td>{{c.item_name}}</td><td>{{c.specification}}</td><td>{{c.quantity}}</td><td>{{c.vendor}}</td><td>{{c.serial_no}}</td><td>{{c.invoice_no}}</td><td>{{c.warranty_period}}</td>
+    <tr ng-repeat="c in products | filter:filterProduct | orderBy:'pur_id'" id="{{c.item_id}}" ng-animate=" 'animate'">
+        <td>{{c.pur_id}}</td><td>{{c.item_name}}</td><td>{{c.specification}}</td><td>{{c.quantity}}</td><td>{{c.vendor}}</td><td>{{c.serial_no}}</td><td>{{c.invoice_no}}</td><td>{{c.warranty_period}}</td>
         <!--<td>{{c.updatedby}}</td>-->
        
         <td style="width:100px">
@@ -73,7 +73,8 @@
       <div class="modal-body">            
                 <form-element label="NAME"  style="" mod="product">
                     <label for="defaultFormLoginEmailEx" class="grey-text">Name</label>
-                    <select class="form-control" id="NAME" ng-model="product.name" ng-disabled="product.id" ng-options="item as item.name for item in items track by item.id" required  focus>
+                    <select class="form-control" id="NAME" ng-model="product.item_id" ng-disabled="product.id" ng-options="item as item.item_name for item in items track by item.item_id
+                    " required  focus>
                       </select>
                 </form-element>
                 <br>
@@ -88,21 +89,27 @@
                     <small class="errorMessage" ng-show="product_form.price.$dirty && product_form.price.$invalid"> Enter the Quantity.</small>
                 </form-element>
                 <br>
+                <form-element label="Invoice No" mod="product">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Vendor</label>
+                    <input type="text" name="vendor" class="form-control" placeholder="Vendor name" ng-model="product.vendor" required/>
+                    <small class="errorMessage" ng-show="product_form.packing.$dirty && product_form.packing.$invalid"> Enter the Vendor.</small>
+                </form-element>
+                <br>
                <form-element label="Serial No" mod="product">
                     <label for="defaultFormLoginEmailEx" class="grey-text">Serial No</label>
-                    <input type="text" name="serialno" class="form-control" placeholder="Serial No" ng-model="product.serialno" only-numbers required/>
+                    <input type="text" name="serialno" class="form-control" placeholder="Serial No" ng-model="product.serial_no" only-numbers required/>
                     <small class="errorMessage" ng-show="product_form.stock.$dirty && product_form.stock.$invalid"> Enter the Serial NO.</small>
                 </form-element>
                 <br>
                 <form-element label="Invoice No" mod="product">
                     <label for="defaultFormLoginEmailEx" class="grey-text">Invoice No</label>
-                    <input type="text" name="invoiceno" class="form-control" placeholder="Invoice No" ng-model="product.invoiceno" required/>
+                    <input type="text" name="invoiceno" class="form-control" placeholder="Invoice No" ng-model="product.invoice_no" required/>
                     <small class="errorMessage" ng-show="product_form.packing.$dirty && product_form.packing.$invalid"> Enter the Invoiceno.</small>
                 </form-element>
                 <br>
                 <form-element label="Warranty Period" mod="product">
                     <label for="defaultFormLoginEmailEx" class="grey-text">Warranty Period</label>
-                     <select class="form-control"  name="warrantyperiod" id="warrantyperiod" placeholder="Warranty Period" ng-model="product.warrantyperiod" required>
+                     <select class="form-control"  name="warranty_period" id="warranty_period" placeholder="Warranty Period" ng-model="product.warranty_period" required>
                         <option>1 Year</option>
                         <option>2 Years</option>
                         <option>3 Years</option>

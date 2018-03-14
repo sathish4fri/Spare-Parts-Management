@@ -39,7 +39,7 @@ $app->get('/employeelist', function() {
 //issue list
 $app->get('/issuedlist', function() { 
     global $db;
-    $q = "select IT.item_id,IT.item_name,IL.quantity,IL.ticket_no,EM.eid,EM.emp_firstname,
+    $q = "select IT.item_id,IT.item_name,IL.id,IL.quantity,IL.ticket_no,EM.eid,EM.emp_firstname,
           EM.emp_lastname,EM.designation,EM.emp_id from issue_list IL join employee EM on  
           IL.emp_id = EM.eid join items IT on IT.item_id = IL.item_id where IL.is_delete = '0'";
     $rows = $db->executeQuery($q);
@@ -48,7 +48,7 @@ $app->get('/issuedlist', function() {
 
 $app->get('/purchaselist', function() { 
     global $db;
-    $q = "select IT.item_id,IT.item_name,PU.vendor,PU.specification,PU.quantity,PU.warranty_period,
+    $q = "select IT.item_id,IT.item_name,PU.pur_id,PU.vendor,PU.specification,PU.quantity,PU.warranty_period,
           PU.invoice_no,PU.serial_no from purchase PU join items IT on IT.item_id = PU.item_id 
           where PU.is_delete = '0'";
     $rows = $db->executeQuery($q);

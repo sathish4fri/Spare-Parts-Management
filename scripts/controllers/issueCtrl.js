@@ -9,20 +9,24 @@
 angular.module('sbAdminApp')
   .controller('issueCtrl', function($scope,$position, $filter, Data ,$timeout) {
   	$scope.product = {};
-    function getProduct(){
+    function getIssueList(){
         Data.get('issuedlist').then(function(data){
         $scope.issuelist = data.data;
         }); 
       }
-    getProduct();
+    getIssueList();
 
      Data.get('itemlist').then(function(data){
         $scope.items = data.data;
     }); 
 
+      Data.get('employeelist').then(function(data){
+        $scope.employeelist = data.data;
+    }); 
+
      $scope.columns = [
                     {text:"ID",predicate:"id",sortable:true,dataType:"number"},
-                    {text:"Name",predicate:"name",sortable:true},
+                    {text:"Item Name",predicate:"name",sortable:true},
                     {text:"Quantity",predicate:"quantity",sortable:true},
                     {text:"Ticket No",predicate:"serialno",reverse:true,sortable:true,dataType:"number"},                    
                     {text:"Issued to IT engineer",predicate:"warrantyperiod",sortable:true},
@@ -34,7 +38,7 @@ angular.module('sbAdminApp')
             Data.delete("products/"+product.id).then(function(result){
               $scope.msg ="delete successfully";
               $scope.hideMsg();
-                 getProduct();
+                 getIssueList();
             });
         }
     };
@@ -45,14 +49,20 @@ angular.module('sbAdminApp')
        },1000)
      }
 
-    $scope.saveProduct = function(product){
-      console.log(product);
-      var val = product.name;
-      product.name = val.name;
+    $scope.saveIssued = function(issue){
+      console.log(issue);
+       var val = issue.item_id;
+      issue.item_id = val.item_id;
+      val = issue.emp_id;
+      issue.emp_id = val.eid;
+      var date = new Date();
+      issue.created_at  = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.toLocaleTimeString();
 
-       Data.post('products', product).then(function (result) {
+       Data.post('saveIssued', issue).then(function (result) {
                     if(result.status != 'error'){
-                        getProduct();                 
+                      $scope.msg ="Record added successfully";
+                       $scope.hideMsg();
+                        getIssueList();                 
                       $("#addproduct .close").click();
                     }else{
                         console.log(result);

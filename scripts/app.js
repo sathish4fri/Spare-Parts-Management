@@ -171,6 +171,18 @@ angular
             })
           }
         }
+    }).state('dashboard.employee',{
+        templateUrl:'views/employee.html',
+        url:'/employee',
+        controller:'employeeCtrl',
+        resolve: {
+          loadMyFile:function($ocLazyLoad) {
+            return $ocLazyLoad.load({
+                name:'sbAdminApp',
+                files:['scripts/controllers/employeeCtrl.js']
+            })
+          }
+        }
     })
   }]);
 

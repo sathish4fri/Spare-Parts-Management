@@ -51,11 +51,13 @@ angular.module('sbAdminApp')
 
     $scope.saveProduct = function(product){
       console.log(product);
-      var val = product.name;
-      product.name = val.name;
+      var val = product.item_id;
+      product.item_id = val.item_id;
 
-       Data.post('products', product).then(function (result) {
+       Data.post('savePurchase', product).then(function (result) {
                     if(result.status != 'error'){
+                       $scope.msg ="Record added successfully";
+                       $scope.hideMsg();
                         getProduct();                 
                       $("#addproduct .close").click();
                     }else{

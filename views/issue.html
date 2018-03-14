@@ -32,8 +32,8 @@
     
     <tr><th ng-repeat="c in columns">{{c.text}}</th></tr>
 
-    <tr ng-repeat="c in issuelist | filter:filterProduct | orderBy:'-id'" id="{{c.id}}" ng-animate=" 'animate'">
-        <td>{{c.item_id}}</td><td>{{c.item_name}}</td><td>{{c.quantity}}</td><td>{{c.ticket_no}}</td><td>{{c.emp_firstname}}</td>
+    <tr ng-repeat="c in issuelist | filter:filterProduct | orderBy:'id'" id="{{c.id}}" ng-animate=" 'animate'">
+        <td>{{c.id}}</td><td>{{c.item_name}}</td><td>{{c.quantity}}</td><td>{{c.ticket_no}}</td><td>{{c.emp_firstname}}</td>
        
         <td style="width:100px">
             <div class="btn-group">
@@ -45,7 +45,7 @@
     </table>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addproduct">
-  Add Product
+  Add Issued List
 </button>
 </div>
 </div>
@@ -66,77 +66,43 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title" id="myLargeModalLabel">Add Product</h4>
+        <h4 class="modal-title" id="myLargeModalLabel">Add IssueList</h4>
       </div>
       <form name="product_form" class="form-horizontal" role="form" novalidate>
       <div class="modal-body">            
-                <form-element label="NAME"  style="" mod="product">
+                <form-element label="NAME"  style="" mod="issue">
                     <label for="defaultFormLoginEmailEx" class="grey-text">Name</label>
-                    <select class="form-control" id="NAME" ng-model="product.name" ng-disabled="product.id" ng-options="item as item.name for item in items track by item.id" required  focus>
+                     <select class="form-control" id="NAME" ng-model="issue.item_id" ng-options="item as item.item_name for item in items track by item.item_id
+                    " required  focus>
                       </select>
                 </form-element>
-                <br>
-                <form-element label="Specification" mod="product">
-                     <label for="defaultFormLoginEmailEx" class="grey-text">Specification</label>
-                    <textarea class="form-control" name="specification" placeholder="Specification" ng-model="product.specification">{{product.specification}}</textarea>
-                </form-element>
-                <br>
-                <form-element label="Quantity" mod="product">
+                <br>               
+                <form-element label="Quantity" mod="issue">
                     <label for="defaultFormLoginEmailEx" class="grey-text">Quantity</label>                    
-                    <input type="text" name="quantity" class="form-control" placeholder="Quantity" ng-model="product.quantity"  only-numbers required/>
+                    <input type="text" name="quantity" class="form-control" placeholder="Quantity" ng-model="issue.quantity"  only-numbers required/>
                     <small class="errorMessage" ng-show="product_form.price.$dirty && product_form.price.$invalid"> Enter the Quantity.</small>
                 </form-element>
-                <br>
-               <form-element label="Serial No" mod="product">
-                    <label for="defaultFormLoginEmailEx" class="grey-text">Serial No</label>
-                    <input type="text" name="serialno" class="form-control" placeholder="Serial No" ng-model="product.serialno" only-numbers required/>
-                    <small class="errorMessage" ng-show="product_form.stock.$dirty && product_form.stock.$invalid"> Enter the Serial NO.</small>
-                </form-element>
-                <br>
-                <form-element label="Invoice No" mod="product">
-                    <label for="defaultFormLoginEmailEx" class="grey-text">Invoice No</label>
-                    <input type="text" name="invoiceno" class="form-control" placeholder="Invoice No" ng-model="product.invoiceno" required/>
+                <br>               
+                <form-element label="Ticket No" mod="issue">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Ticket No</label>
+                    <input type="text" name="ticket_no" class="form-control" placeholder="Ticket No" ng-model="issue.ticket_no" required/>
                     <small class="errorMessage" ng-show="product_form.packing.$dirty && product_form.packing.$invalid"> Enter the Invoiceno.</small>
                 </form-element>
                 <br>
-                <form-element label="Warranty Period" mod="product">
-                    <label for="defaultFormLoginEmailEx" class="grey-text">Warranty Period</label>
-                     <select class="form-control"  name="warrantyperiod" id="warrantyperiod" placeholder="Warranty Period" ng-model="product.warrantyperiod" required>
-                        <option>1 Year</option>
-                        <option>2 Years</option>
-                        <option>3 Years</option>
-                        <option>5 Years</option>
-                        <option>Lifetime</option>
-                        <option>NA</option>
+                <form-element label="NAME"  style="" mod="issue">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Name</label>
+                     <select class="form-control" id="NAME" ng-model="issue.emp_id" ng-options="emp as emp.emp_firstname for emp in employeelist track by emp.eid
+                    " required  focus>
                       </select>
-                     <small class="errorMessage" ng-show="product_form.packing.$dirty && product_form.packing.$invalid"> Enter the Warranty Period.</small>
-                </form-element>
-               <!-- <form-element label="Updated By" mod="product">
-                    <label for="defaultFormLoginEmailEx" class="grey-text">Updated By</label>
-                    <input type="text" name="updatedby" class="form-control" placeholder="Updated By" ng-model="product.updatedby"/>
-                    <small class="errorMessage" ng-show="product_form.packing.$dirty && product_form.packing.$invalid"> Enter the Updated By.</small>
-                </form-element>
-                -->
+                </form-element>              
                 <div class="space"></div>
                 <div class="space-4"></div>
-               <!-- <div class="modal-footer">
-                    <form-element label="">
-                        <div class="text-right">
-                            <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Cancel</a>
-                            <button ng-click="saveProduct(product);"
-                                    ng-disabled="product_form.$invalid || enableUpdate"
-                                    class="btn btn-sm btn-primary"
-                                    type="submit">
-                                <i class="ace-icon fa fa-check"></i>{{buttonText}}
-                            </button>
-                        </div>
-                    </form-element>
-                </div>-->
+              
             
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" ng-click="saveProduct(product);"
+        <button type="button" class="btn btn-primary" ng-click="saveIssued(issue);"
                                     ng-disabled="product_form.$invalid || enableUpdate"
                                     class="btn btn-sm btn-primary"
                                     type="submit">Save changes</button>
