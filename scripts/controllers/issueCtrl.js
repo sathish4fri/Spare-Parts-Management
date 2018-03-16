@@ -46,7 +46,7 @@ angular.module('sbAdminApp')
      $scope.hideMsg = function(){
        $timeout(function(){
           $scope.msg = "";
-       },1000)
+       },3000)
      }
 
     $scope.saveIssued = function(issue){
@@ -64,6 +64,47 @@ angular.module('sbAdminApp')
                        $scope.hideMsg();
                         getIssueList();                 
                       $("#addproduct .close").click();
+                    }else{
+                        console.log(result);
+                    }
+                });
+
+
+    };
+
+     $scope.editIssued = function(issue){
+      $scope.eissue = angular.copy(issue);
+      $scope.items.filter(function(obj){
+        if($scope.eissue.item_id == obj.item_id)
+        $scope.eissue.item_id = obj;
+      });
+      $scope.employeelist.filter(function(obj1){
+        if($scope.eissue.eid == obj1.eid)
+        $scope.eissue.emp_id = obj1;
+      });     
+
+      $("#editIssued").modal('show');
+    };
+
+    $scope.updateIssued = function(issue){
+      console.log(issue);
+       var val = issue.item_id;
+      issue.item_id = val.item_id;
+      val = issue.emp_id;
+      issue.emp_id = val.eid;
+
+     delete issue.item_name;
+     delete issue.eid;
+     delete issue.emp_firstname;
+     delete issue.emp_lastname;
+     delete issue.designation;
+
+       Data.post('updateIssued', issue).then(function (result) {
+                    if(result.status != 'error'){
+                       $scope.msg ="Record Updated successfully";
+                       $scope.hideMsg();
+                        getIssueList();                 
+                      $("#editIssued .close").click();
                     }else{
                         console.log(result);
                     }

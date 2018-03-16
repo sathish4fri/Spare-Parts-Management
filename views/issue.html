@@ -37,8 +37,8 @@
        
         <td style="width:100px">
             <div class="btn-group">
-              <button type="button" class="btn btn-default fa fa-edit" ng-click="open(c);"></button>
-              <button type="button" class="btn btn-danger fa fa-trash-o" ng-click="deleteProduct(c);"></button>
+              <button type="button" class="btn btn-default fa fa-edit" ng-click="editIssued(c);"></button>
+              <button type="button" class="btn btn-danger fa fa-trash-o" ng-click="deleteIssued(c);"></button>
             </div>
         </td>
     </tr>
@@ -112,7 +112,58 @@
   </div>
 </div>
 
-
+<div class="modal fade" id="editIssued" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myLargeModalLabel">Edit IssueList</h4>
+      </div>
+      <form name="product_form" class="form-horizontal" role="form" novalidate>
+      <div class="modal-body">            
+                <form-element label="NAME"  style="" mod="eissue">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Name</label>
+                     <select class="form-control" id="NAME" ng-model="eissue.item_id" ng-options="item as item.item_name for item in items track by item.item_id
+                    " required  focus>
+                      </select>
+                </form-element>
+                <br>               
+                <form-element label="Quantity" mod="issue">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Quantity</label>                    
+                    <input type="text" name="quantity" class="form-control" placeholder="Quantity" ng-model="eissue.quantity"  only-numbers required/>
+                    <small class="errorMessage" ng-show="product_form.price.$dirty && product_form.price.$invalid"> Enter the Quantity.</small>
+                </form-element>
+                <br>               
+                <form-element label="Ticket No" mod="issue">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Ticket No</label>
+                    <input type="text" name="ticket_no" class="form-control" placeholder="Ticket No" ng-model="eissue.ticket_no" required/>
+                    <small class="errorMessage" ng-show="product_form.packing.$dirty && product_form.packing.$invalid"> Enter the Invoiceno.</small>
+                </form-element>
+                <br>
+                <form-element label="NAME"  style="" mod="issue">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Name</label>
+                     <select class="form-control" id="NAME" ng-model="eissue.emp_id" ng-options="emp as emp.emp_firstname for emp in employeelist track by emp.eid
+                    " required  focus>
+                      </select>
+                </form-element>              
+                <div class="space"></div>
+                <div class="space-4"></div>
+              
+            
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="updateIssued(eissue);"
+                                    ng-disabled="product_form.$invalid || enableUpdate"
+                                    class="btn btn-sm btn-primary"
+                                    type="submit">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 
 </div>

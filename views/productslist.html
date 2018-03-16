@@ -38,7 +38,7 @@
        
         <td style="width:100px">
             <div class="btn-group">
-              <button type="button" class="btn btn-default fa fa-edit" ng-click="open(c);"></button>
+              <button type="button" class="btn btn-default fa fa-edit" ng-click="editProduct(c)"></button>
               <button type="button" class="btn btn-danger fa fa-trash-o" ng-click="deleteProduct(c);"></button>
             </div>
         </td>
@@ -155,6 +155,99 @@
 </div>
 
 
+<div class="modal fade" id="editproduct" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myLargeModalLabel">Edit Product</h4>
+      </div>
+      <form name="product_form" class="form-horizontal" role="form" novalidate>
+      <div class="modal-body">       
+                <form-element label="NAME"  style="" mod="product">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Name</label>
+                    <select class="form-control" id="NAME" ng-model="eproduct.item_id" ng-options="item as item.item_name for item in items track by item.item_id
+                    " required  focus>
+                      </select>
+                </form-element>
+                <br>
+                <form-element label="Specification" mod="product">
+                     <label for="defaultFormLoginEmailEx" class="grey-text">Specification</label>
+                    <textarea class="form-control" name="specification" placeholder="Specification" ng-model="eproduct.specification">{{product.specification}}</textarea>
+                </form-element>
+                <br>
+                <form-element label="Quantity" mod="product">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Quantity</label>                    
+                    <input type="text" name="quantity" class="form-control" placeholder="Quantity" ng-model="eproduct.quantity"  only-numbers required/>
+                    <small class="errorMessage" ng-show="product_form.price.$dirty && product_form.price.$invalid"> Enter the Quantity.</small>
+                </form-element>
+                <br>
+                <form-element label="Invoice No" mod="product">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Vendor</label>
+                    <input type="text" name="vendor" class="form-control" placeholder="Vendor name" ng-model="eproduct.vendor" required/>
+                    <small class="errorMessage" ng-show="product_form.packing.$dirty && product_form.packing.$invalid"> Enter the Vendor.</small>
+                </form-element>
+                <br>
+               <form-element label="Serial No" mod="product">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Serial No</label>
+                    <input type="text" name="serialno" class="form-control" placeholder="Serial No" ng-model="eproduct.serial_no" only-numbers required/>
+                    <small class="errorMessage" ng-show="product_form.stock.$dirty && product_form.stock.$invalid"> Enter the Serial NO.</small>
+                </form-element>
+                <br>
+                <form-element label="Invoice No" mod="product">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Invoice No</label>
+                    <input type="text" name="invoiceno" class="form-control" placeholder="Invoice No" ng-model="eproduct.invoice_no" required/>
+                    <small class="errorMessage" ng-show="product_form.packing.$dirty && product_form.packing.$invalid"> Enter the Invoiceno.</small>
+                </form-element>
+                <br>
+                <form-element label="Warranty Period" mod="product">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Warranty Period</label>
+                     <select class="form-control"  name="warranty_period" id="warranty_period" placeholder="Warranty Period" ng-model="eproduct.warranty_period" required>
+                        <option>1 Year</option>
+                        <option>2 Years</option>
+                        <option>3 Years</option>
+                        <option>5 Years</option>
+                        <option>Lifetime</option>
+                        <option>NA</option>
+                      </select>
+                     <small class="errorMessage" ng-show="product_form.packing.$dirty && product_form.packing.$invalid"> Enter the Warranty Period.</small>
+                </form-element>
+               <!-- <form-element label="Updated By" mod="product">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Updated By</label>
+                    <input type="text" name="updatedby" class="form-control" placeholder="Updated By" ng-model="product.updatedby"/>
+                    <small class="errorMessage" ng-show="product_form.packing.$dirty && product_form.packing.$invalid"> Enter the Updated By.</small>
+                </form-element>
+                -->
+                <div class="space"></div>
+                <div class="space-4"></div>
+               <!-- <div class="modal-footer">
+                    <form-element label="">
+                        <div class="text-right">
+                            <a class="btn btn-sm" ng-click="cancel()"><i class="ace-icon fa fa-reply"></i>Cancel</a>
+                            <button ng-click="saveProduct(product);"
+                                    ng-disabled="product_form.$invalid || enableUpdate"
+                                    class="btn btn-sm btn-primary"
+                                    type="submit">
+                                <i class="ace-icon fa fa-check"></i>{{buttonText}}
+                            </button>
+                        </div>
+                    </form-element>
+                </div>-->
+            
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="updateProduct(eproduct);"
+                                    ng-disabled="product_form.$invalid || enableUpdate"
+                                    class="btn btn-sm btn-primary"
+                                    type="submit">Save changes</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 
 </div>

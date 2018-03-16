@@ -19,7 +19,7 @@ angular.module('sbAdminApp')
       $scope.hideMsg = function(){
        $timeout(function(){
           $scope.msg = "";
-       },1000)
+       },3000)
      }
    
     $scope.saveItem = function(item){
@@ -37,4 +37,27 @@ angular.module('sbAdminApp')
                     }
                 });
     }
+
+
+     $scope.editItem = function(item){
+      $scope.eitem = angular.copy(item);      
+      $("#editItem").modal('show');
+    };
+
+    $scope.updateItem = function(item){
+      console.log(item);
+     
+       Data.post('updateitemlist', item).then(function (result) {
+                    if(result.status != 'error'){
+                       $scope.msg ="Record Updated successfully";
+                       $scope.hideMsg();
+                        getItemList();                 
+                      $("#editItem .close").click();
+                    }else{
+                        console.log(result);
+                    }
+                });
+
+
+    };
   });
