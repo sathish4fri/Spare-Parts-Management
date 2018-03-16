@@ -58,6 +58,8 @@ angular.module('sbAdminApp')
       var val = product.item_id;
       product.item_id = val.item_id;
 
+      product.created_at = Data.getCurrentTime();
+
        Data.post('savePurchase', product).then(function (result) {
                     if(result.status != 'error'){
                        $scope.msg ="Record added successfully";

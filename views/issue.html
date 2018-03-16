@@ -44,7 +44,7 @@
     </tr>
     </table>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addproduct">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addproduct" ng-click="issue = '';">
   Add Issued List
 </button>
 </div>
@@ -68,7 +68,7 @@
         </button>
         <h4 class="modal-title" id="myLargeModalLabel">Add IssueList</h4>
       </div>
-      <form name="product_form" class="form-horizontal" role="form" novalidate>
+      <form name="issue_form" class="form-horizontal" role="form" novalidate>
       <div class="modal-body">            
                 <form-element label="NAME"  style="" mod="issue">
                     <label for="defaultFormLoginEmailEx" class="grey-text">Name</label>
@@ -80,13 +80,13 @@
                 <form-element label="Quantity" mod="issue">
                     <label for="defaultFormLoginEmailEx" class="grey-text">Quantity</label>                    
                     <input type="text" name="quantity" class="form-control" placeholder="Quantity" ng-model="issue.quantity"  only-numbers required/>
-                    <small class="errorMessage" ng-show="product_form.price.$dirty && product_form.price.$invalid"> Enter the Quantity.</small>
+                    <small class="errorMessage" ng-show="issue_form.price.$dirty && issue_form.price.$invalid"> Enter the Quantity.</small>
                 </form-element>
                 <br>               
                 <form-element label="Ticket No" mod="issue">
                     <label for="defaultFormLoginEmailEx" class="grey-text">Ticket No</label>
                     <input type="text" name="ticket_no" class="form-control" placeholder="Ticket No" ng-model="issue.ticket_no" required/>
-                    <small class="errorMessage" ng-show="product_form.packing.$dirty && product_form.packing.$invalid"> Enter the Invoiceno.</small>
+                    <small class="errorMessage" ng-show="issue_form.packing.$dirty && issue_form.packing.$invalid"> Enter the Invoiceno.</small>
                 </form-element>
                 <br>
                 <form-element label="NAME"  style="" mod="issue">
@@ -103,7 +103,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" ng-click="saveIssued(issue);"
-                                    ng-disabled="product_form.$invalid || enableUpdate"
+                                    ng-disabled="issue_form.$invalid"
                                     class="btn btn-sm btn-primary"
                                     type="submit">Save changes</button>
       </div>
@@ -121,7 +121,7 @@
         </button>
         <h4 class="modal-title" id="myLargeModalLabel">Edit IssueList</h4>
       </div>
-      <form name="product_form" class="form-horizontal" role="form" novalidate>
+      <form name="issueedit_form" class="form-horizontal" role="form" novalidate>
       <div class="modal-body">            
                 <form-element label="NAME"  style="" mod="eissue">
                     <label for="defaultFormLoginEmailEx" class="grey-text">Name</label>
@@ -133,13 +133,13 @@
                 <form-element label="Quantity" mod="issue">
                     <label for="defaultFormLoginEmailEx" class="grey-text">Quantity</label>                    
                     <input type="text" name="quantity" class="form-control" placeholder="Quantity" ng-model="eissue.quantity"  only-numbers required/>
-                    <small class="errorMessage" ng-show="product_form.price.$dirty && product_form.price.$invalid"> Enter the Quantity.</small>
+                    <small class="errorMessage" ng-show="issueedit_form.price.$dirty && issueedit_form.price.$invalid"> Enter the Quantity.</small>
                 </form-element>
                 <br>               
                 <form-element label="Ticket No" mod="issue">
                     <label for="defaultFormLoginEmailEx" class="grey-text">Ticket No</label>
                     <input type="text" name="ticket_no" class="form-control" placeholder="Ticket No" ng-model="eissue.ticket_no" required/>
-                    <small class="errorMessage" ng-show="product_form.packing.$dirty && product_form.packing.$invalid"> Enter the Invoiceno.</small>
+                    <small class="errorMessage" ng-show="issueedit_form.packing.$dirty && issueedit_form.packing.$invalid"> Enter the Invoiceno.</small>
                 </form-element>
                 <br>
                 <form-element label="NAME"  style="" mod="issue">
@@ -156,7 +156,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" ng-click="updateIssued(eissue);"
-                                    ng-disabled="product_form.$invalid || enableUpdate"
+                                    ng-disabled="issueedit_form.$invalid"
                                     class="btn btn-sm btn-primary"
                                     type="submit">Save changes</button>
       </div>

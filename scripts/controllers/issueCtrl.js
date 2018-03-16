@@ -60,7 +60,7 @@ angular.module('sbAdminApp')
       val = issue.emp_id;
       issue.emp_id = val.eid;
       var date = new Date();
-      issue.created_at  = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate() + ' ' + date.toLocaleTimeString();
+      issue.created_at = Data.getCurrentTime();
 
        Data.post('saveIssued', issue).then(function (result) {
                     if(result.status != 'error'){

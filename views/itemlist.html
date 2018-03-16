@@ -49,7 +49,7 @@
     </table>
 
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addItem">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addItem" ng-click="item = '';">
   Add Item
 </button>
 </div>
@@ -85,7 +85,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" ng-click="saveItem(item);"
-                                    ng-disabled="product_form.$invalid || enableUpdate"
+                                    ng-disabled="item_form.$invalid || enableUpdate"
                                     class="btn btn-sm btn-primary"
                                     type="submit">Add</button>
       </div>
@@ -103,7 +103,7 @@
         </button>
         <h4 class="modal-title" id="myLargeModalLabel">Edit Item</h4>
       </div>
-      <form name="item_form" class="form-horizontal" role="form" novalidate>
+      <form name="itemedit_form" class="form-horizontal" role="form" novalidate>
       <div class="modal-body">            
                 <form-element label="NAME"  style="" mod="eitem">
                     <label for="defaultFormLoginEmailEx" class="grey-text">Item Name</label>
@@ -118,7 +118,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" ng-click="updateItem(eitem);"
-                                    ng-disabled="product_form.$invalid || enableUpdate"
+                                    ng-disabled="itemedit_form.$invalid || enableUpdate"
                                     class="btn btn-sm btn-primary"
                                     type="submit">Update</button>
       </div>
