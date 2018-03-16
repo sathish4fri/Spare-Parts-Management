@@ -35,7 +35,11 @@ angular.module('sbAdminApp')
 
     $scope.deleteProduct = function(product){
         if(confirm("Are you sure to remove the product")){
-            Data.post("deletereq",product.pur_id).then(function(result){
+           var data =   {
+            "del_id":product.pur_id,
+            "module": "purchase"
+            }
+            Data.post("deletereq",data).then(function(result){
               $scope.msg ="delete successfully";
               $scope.hideMsg();
                  getProduct();

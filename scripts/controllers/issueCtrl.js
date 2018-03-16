@@ -33,12 +33,16 @@ angular.module('sbAdminApp')
 					{text:"Action",predicate:"",sortable:false}
                 ];
 
-    $scope.deleteProduct = function(product){
+    $scope.deleteIssued = function(issue){
         if(confirm("Are you sure to remove the product")){
-            Data.delete("products/"+product.id).then(function(result){
+            var data =   {
+            "del_id":issue.id,
+            "module": "issue_list"
+            }
+            Data.post("deletereq",data).then(function(result){
               $scope.msg ="delete successfully";
               $scope.hideMsg();
-                 getIssueList();
+              getIssueList();
             });
         }
     };

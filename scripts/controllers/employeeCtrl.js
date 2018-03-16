@@ -15,7 +15,7 @@ $scope.columns = [
                     {text:"Last Name",predicate:"emp_lastname",sortable:true},
                     {text:"Designation",predicate:"designation",reverse:true,sortable:true},                    
                     {text:"Employee Id",predicate:"emp_id",sortable:true},
-					{text:"Action",predicate:"",sortable:false}
+					//{text:"Action",predicate:"",sortable:false}
                 ];
 
  function getEmployeeList(){
