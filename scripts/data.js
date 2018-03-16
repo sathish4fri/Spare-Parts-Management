@@ -26,5 +26,31 @@ angular.module('sbAdminApp')
                 return results.data;
             });
         };
+        obj.getCurrentTime = function(){
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var hh = today.getHours();
+            var min = today.getMinutes();
+            var ss = today.getSeconds();
+
+            var yyyy = today.getFullYear();
+            if(dd<10){
+                dd='0'+dd;
+            } 
+            if(mm<10){
+                mm='0'+mm;
+            } 
+            if(hh<10){
+                hh='0'+hh;
+            } 
+            if(min<10){
+                min='0'+min;
+            } 
+            if(ss<10){
+                ss='0'+ss;
+            } 
+            return yyyy+'-'+mm+'-'+dd+' '+hh+':'+min+':'+ss;
+        }
         return obj;
 }]);

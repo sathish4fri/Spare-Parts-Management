@@ -24,6 +24,7 @@ angular.module('sbAdminApp')
    
     $scope.saveItem = function(item){
       item.status = 1;
+      item.created_at = Data.getCurrentTime();
       console.log(item);
 
        Data.post('saveitemlist', item).then(function (result) {
