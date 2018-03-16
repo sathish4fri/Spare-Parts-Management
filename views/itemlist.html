@@ -41,8 +41,8 @@
        
         <td style="width:100px">
             <div class="btn-group">
-              <button type="button" class="btn btn-default fa fa-edit" ng-click="open(c);"></button>
-              <button type="button" class="btn btn-danger fa fa-trash-o" ng-click="deleteProduct(c);"></button>
+              <button type="button" class="btn btn-default fa fa-edit" ng-click="editItem(c)"></button>
+              <!--<button type="button" class="btn btn-danger fa fa-trash-o" ng-click="deleteItem(c);"></button>-->
             </div>
         </td>
     </tr>
@@ -68,7 +68,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-        <h4 class="modal-title" id="myLargeModalLabel">Add Product</h4>
+        <h4 class="modal-title" id="myLargeModalLabel">Add Item</h4>
       </div>
       <form name="item_form" class="form-horizontal" role="form" novalidate>
       <div class="modal-body">            
@@ -93,4 +93,40 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="editItem" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="myLargeModalLabel">Edit Item</h4>
+      </div>
+      <form name="item_form" class="form-horizontal" role="form" novalidate>
+      <div class="modal-body">            
+                <form-element label="NAME"  style="" mod="eitem">
+                    <label for="defaultFormLoginEmailEx" class="grey-text">Item Name</label>
+                   <input type="text" name="item_name" class="form-control" placeholder="eg (Mouse)" ng-model="eitem.item_name"  required/>
+                </form-element>
+                <br>                             
+                <div class="space"></div>
+                <div class="space-4"></div>
+             
+            
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" ng-click="updateItem(eitem);"
+                                    ng-disabled="product_form.$invalid || enableUpdate"
+                                    class="btn btn-sm btn-primary"
+                                    type="submit">Update</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
 </div>
